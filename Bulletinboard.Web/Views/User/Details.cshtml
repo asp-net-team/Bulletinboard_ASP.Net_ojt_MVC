@@ -1,0 +1,60 @@
+﻿@model Bulletinboard.Web.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="border border-success shadow">
+    <div class="bg-success">
+        <label class="h5 py-2 px-2 text-white">User Details</label>
+    </div>
+    <div class="mx-auto my-5 col-md-11">
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Name)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Name)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Email)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Email)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Password)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Password)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Type)</label>
+            @if (Model.Type == 0)
+            {
+                <label class="col-sm-9 col-form-label">User</label>
+            }
+            else
+            {
+                <label class="col-sm-9 col-form-label">Admin</label>
+            }
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Phone)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Phone)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Birthday)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Birthday)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Address)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Address)</label>
+        </div>
+        <div class="row mb-3">
+            @Html.LabelFor(model => model.Profile, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+            <div class="col-sm-5">
+                <div>
+                    <img src="@Url.Content("~/Resource/images/" + Model.Profile)" id="previewImage" class="mt-2">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-primary col-1" })
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning col-1" })
+        </div>
+    </div>
+</div>

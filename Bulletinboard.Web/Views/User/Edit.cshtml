@@ -1,0 +1,104 @@
+﻿@model Bulletinboard.Web.Models.UserEditModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="border border-success shadow">
+        <div class="bg-success">
+            <label class="h5 py-2 px-2 text-white">User Update</label>
+        </div>
+        <div class="mx-auto my-5 col-md-11">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserId)
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-9">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col-md-3 col-form-label" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-5">
+                    @Html.DropDownListFor(model => model.Type, new List<SelectListItem>
+                       {
+                           new SelectListItem {Text = "-- Select --", Value = "" },
+                           new SelectListItem {Text = "User", Value = "0"},
+                           new SelectListItem {Text = "Admin", Value = "1" },
+                       }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-5">
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-5">
+                    @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-5">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row mb-3">
+                @Html.LabelFor(model => model.Profile, htmlAttributes: new { @class = "col-form-label col-sm-3" })
+                <div class="col-sm-5">
+                    <label>
+                        @Html.TextBoxFor(model => model.ProfileEdit,
+                        new { @class = "form-control", type = "file", @onchange = "ShowpImagePreview(this)", @style = "display: none;" })
+                        <span id="file-fake-btn">Choose File</span>
+                    </label>
+                    <span id="file-fake-name">@ViewBag.editImageName</span>
+                    <div>
+                        <img src="@Url.Content(Model.ProfilePath)" id="previewImage" class="mt-2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Update" class="btn btn-primary col-1" />
+                <input type="reset" class="btn btn-secondary col-1" value="Clear" />
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning col-1" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/User/user.js")
+}

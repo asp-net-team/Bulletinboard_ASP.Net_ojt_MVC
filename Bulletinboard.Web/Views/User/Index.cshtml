@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Bulletinboard.Web.Models.User>
+
+@{
+    ViewBag.Title = "User List";
+}
+
+<div class="border border-success shadow">
+    <div class="bg-success">
+        <label class="h5 py-2 px-2 text-white">User List</label>
+        @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary col-1" })
+    </div>
+    <div class="mx-auto my-5 col-md-11">
+        <!-- User regist success message block -->
+        @if (TempData["success"] != null)
+        {
+            <div class="alert alert-success col-md-6">
+                <strong>Success!</strong>
+                <label>@TempData["success"]</label>
+            </div>
+        }
+        <!-- User search empty message -->
+        @if (!string.IsNullOrEmpty(ViewBag.emptyMessage))
+        {
+            <div class="alert alert-danger col-md-6">
+                <strong>Fail!</strong> @ViewBag.emptyMessage
+            </div>
+        }
+        <!-- Search user -->
+        <form id="myForm" action="/User/Index" method="Post" class="float-lg-start col-sm-8">
+            <div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Name:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="name" value=@ViewBag.name />
+                    </div>
+                    <label class="col-sm-1 col-form-label">Email:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="email" value=@ViewBag.email />
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- User upload and download csv -->
+        <form id="myForm" action="/User/Index" method="Get" class="float-lg-end col-sm-4">
+            <div>
+                <div class="row mb-3 text-end">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-primary">Upload</button>
+                        <button type="button" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--- User list table block -->
+        <table class="table table table-striped shadow">
+            <tr style="background-color: #0DCAF0">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Birthday)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @if (item.Type == 0)
+                        {
+                            <label>User</label>
+                        }
+                        else
+                        {
+                            <label>Admin</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Birthday)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "btn btn-outline-primary btn-sm col-3" })
+                        @Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "btn btn-outline-primary btn-sm col-4" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { @class = "btn btn-outline-danger btn-sm col-4" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

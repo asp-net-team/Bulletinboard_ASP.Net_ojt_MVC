@@ -1,0 +1,25 @@
+﻿@model Bulletinboard.Web.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="border border-success shadow">
+    <div class="bg-success">
+        <label class="h5 py-2 px-2 text-white">Post Details</label>
+    </div>
+    <div class="mx-auto my-5 col-md-11">
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Title)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Title)</label>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Description)</label>
+            <label class="col-sm-9 col-form-label">@Html.DisplayFor(model => model.Description)</label>
+        </div>
+        <div class="col-md-12 text-center">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }, new { @class = "btn btn-primary col-1" })
+            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-warning col-1" })
+        </div>
+    </div>
+</div>

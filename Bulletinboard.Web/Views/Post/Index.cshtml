@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Bulletinboard.Web.Models.Post>
+
+@{
+    ViewBag.Title = "Post List";
+}
+
+<div class="border border-success shadow">
+    <div class="bg-success">
+        <label class="h5 py-2 px-2 text-white">Post List</label>
+        @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary col-1" })
+    </div>
+    <div class="mx-auto my-5 col-md-11">
+        <!-- Success message block -->
+        @if (TempData["success"] != null)
+        {
+            <div class="alert alert-success col-md-6">
+                <strong>Success!</strong>
+                <label>@TempData["success"]</label>
+            </div>
+        }
+        <!--- Post table block -->
+        <table class="table table table-striped shadow">
+            <tr style="background-color: #0DCAF0">
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PostId }, new { @class = "btn btn-outline-primary btn-sm col-3" })
+                        @Html.ActionLink("Details", "Details", new { id = item.PostId }, new { @class = "btn btn-outline-primary btn-sm col-3" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PostId }, new { @class = "btn btn-outline-danger btn-sm col-3" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
